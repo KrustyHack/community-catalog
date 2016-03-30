@@ -1,0 +1,6 @@
+name: Rancher Server Nginx SSL
+description: |
+  Rancher Server behind Nginx proxy with Let's Encrypt SSL
+version: v1.0.0
+category: Applications
+maintainer: Nicolas Hug <webmaster@nicolashug.com>

@@ -1,0 +1,33 @@
+letsencrypt:
+  labels:
+    io.rancher.container.pull_image: always
+  image: jrcs/letsencrypt-nginx-proxy-companion:latest
+  volumes:
+  - /home/docker/nginx-proxy/ssl:/etc/nginx/certs:rw
+  - /var/run/docker.sock:/var/run/docker.sock:ro
+  volumes_from:
+  - nginx-proxy
+nginx-proxy:
+  ports:
+  - 443:443/tcp
+  - 80:80/tcp
+  labels:
+    io.rancher.sidekicks: letsencrypt,rancher-server
+    io.rancher.container.pull_image: always
+  image: jwilder/nginx-proxy:latest
+  volumes:
+  - /etc/nginx/vhost.d
+  - /usr/share/nginx/html
+  - /home/docker/nginx-proxy/ssl:/etc/nginx/certs:ro
+  - /var/run/docker.sock:/tmp/docker.sock:ro
+rancher-server:
+  environment:
+    LETSENCRYPT_EMAIL: webmaster@domain.com
+    LETSENCRYPT_HOST: www.domain.com
+    VIRTUAL_HOST: www.domain.com
+    VIRTUAL_PORT: '8080'
+  labels:
+    io.rancher.container.pull_image: always
+  image: rancher/server:v0.59.1
+  volumes:
+  - /home/docker/rancher-server/mysql:/var/lib/mysql:rw

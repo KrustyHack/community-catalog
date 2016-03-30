@@ -22,12 +22,12 @@ nginx-proxy:
   - /var/run/docker.sock:/tmp/docker.sock:ro
 rancher-server:
   environment:
-    LETSENCRYPT_EMAIL: webmaster@domain.com
-    LETSENCRYPT_HOST: www.domain.com
-    VIRTUAL_HOST: www.domain.com
+    LETSENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL}
+    LETSENCRYPT_HOST: ${LETS_ENCRYPT_DOMAIN}
+    VIRTUAL_HOST: ${VHOST_DOMAIN}
     VIRTUAL_PORT: '8080'
   labels:
     io.rancher.container.pull_image: always
-  image: rancher/server:v0.59.1
+  image: rancher/server:v1.0.0
   volumes:
   - /home/docker/rancher-server/mysql:/var/lib/mysql:rw

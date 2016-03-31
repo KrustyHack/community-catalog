@@ -1,6 +1,7 @@
 letsencrypt:
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
   image: jrcs/letsencrypt-nginx-proxy-companion:latest
   volumes:
   - /home/docker/nginx-proxy/ssl:/etc/nginx/certs:rw
@@ -14,6 +15,7 @@ nginx-proxy:
   labels:
     io.rancher.sidekicks: letsencrypt,rancher-server
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
   image: jwilder/nginx-proxy:latest
   volumes:
   - /etc/nginx/vhost.d
@@ -28,6 +30,7 @@ rancher-server:
     VIRTUAL_PORT: '8080'
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
   image: rancher/server:v1.0.0
   volumes:
   - /home/docker/rancher-server/mysql:/var/lib/mysql:rw

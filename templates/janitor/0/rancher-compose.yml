@@ -22,4 +22,10 @@
       default: "rancher/agent:v0.8.2,rancher/agent-instance:v0.6.0"
       required: false
       type: "string"
+    - variable: "DOCKER_VOLUME"
+      label: "Docker mounted volume"
+      description: "Choose path for Docker lib volume on host"
+      default: "/var/lib/docker"
+      required: true
+      type: "string"
 

@@ -2,7 +2,7 @@ letsencrypt:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
-  image: jrcs/letsencrypt-nginx-proxy-companion:latest
+  image: jrcs/letsencrypt-nginx-proxy-companion:stable
   volumes:
   - /home/docker/nginx-proxy/ssl:/etc/nginx/certs:rw
   - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -16,7 +16,7 @@ nginx-proxy:
     io.rancher.sidekicks: letsencrypt,rancher-server
     io.rancher.container.pull_image: always
     io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
-  image: jwilder/nginx-proxy:latest
+  image: jwilder/nginx-proxy:0.2.0
   volumes:
   - /etc/nginx/vhost.d
   - /usr/share/nginx/html

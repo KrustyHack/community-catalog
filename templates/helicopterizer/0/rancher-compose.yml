@@ -36,6 +36,12 @@
       description: "AWS S3 path"
       required: true
       type: "string"
+    - variable: "AWS_DEFAULT_REGION"
+      label: "AWS default region"
+      description: "AWS default region"
+      required: true
+      default: "eu-west-1"
+      type: "string"
     - variable: "HOST_LABEL"
       label: "Host label"
       description: "Specify a Rancher host label here that will be used to determine which server must be synced"

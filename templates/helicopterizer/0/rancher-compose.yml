@@ -1,0 +1,44 @@
+.catalog:
+  name: "Helicopterizer"
+  version: "v1.0.0"
+  description: "Helicopterizer Docker Backup to AWS"
+  uuid: rancher-server-nginx-ssl-0
+  questions: 
+    - variable: "CRON_SCHEDULE"
+      label: "Cron schedule"
+      description: "Cron schedule"
+      required: true
+      default: "0 0 */1 * *"
+      type: "string"
+    - variable: "STORAGE_PROVIDER"
+      label: "Storage provider"
+      description: "Storage provider"
+      default: "AWS"
+      required: true
+      type: "string"
+    - variable: "AWS_ACCESS_KEY_ID"
+      label: "AWS access key id"
+      description: "AWS access key id"
+      required: true
+      type: "string"
+    - variable: "AWS_SECRET_ACCESS_KEY"
+      label: "AWS secret access key"
+      description: "AWS secret access key"
+      required: true
+      type: "string"
+    - variable: "AWS_S3_BUCKET_NAME"
+      label: "AWS S3 bucket name"
+      description: "AWS S3 bucket name"
+      required: true
+      type: "string"
+    - variable: "AWS_S3_PATH"
+      label: "AWS S3 path"
+      description: "AWS S3 path"
+      required: true
+      type: "string"
+    - variable: "HOST_LABEL"
+      label: "Host label"
+      description: "Specify a Rancher host label here that will be used to determine which server must be synced"
+      required: true
+      default: "backup-server=true"
+      type: "string"

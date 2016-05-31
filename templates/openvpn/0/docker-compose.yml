@@ -1,0 +1,53 @@
+openvpn-data:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
+  image: busybox:latest
+  volumes:
+  - /etc/openvpn:/etc/openvpn:rw
+openvpn-config:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
+  image: jwilder/nginx-proxy:0.2.0
+  volumes:
+  - /etc/nginx/vhost.d
+  - /usr/share/nginx/html
+  - /home/docker/nginx-proxy/ssl:/etc/nginx/certs:ro
+  - /var/run/docker.sock:/tmp/docker.sock:ro
+rancher-server:
+  environment:
+    LETSENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL}
+    LETSENCRYPT_HOST: ${DOMAIN}
+    VIRTUAL_HOST: ${DOMAIN}
+    VIRTUAL_PORT: '8080'
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
+  image: rancher/server:v1.0.0
+  volumes:
+  - /home/docker/rancher-server/mysql:/var/lib/mysql:rw
+
+
+
+    docker run --volumes-from $OVPN_DATA --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+    docker run --volumes-from $OVPN_DATA --rm -it kylemanna/openvpn ovpn_initpki
+
+    Start OpenVPN server process
+
+        On Docker version 1.2 and newer
+
+        docker run --volumes-from $OVPN_DATA -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
+
+        On Docker older than version 1.2
+
+        docker run --volumes-from $OVPN_DATA -d -p 1194:1194/udp --privileged kylemanna/openvpn
+
+    Generate a client certificate without a passphrase
+
+    docker run --volumes-from $OVPN_DATA --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass
+
+    Retrieve the client configuration with embedded certificates
+
+    docker run --volumes-from $OVPN_DATA --rm kylemanna/openvpn ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
+

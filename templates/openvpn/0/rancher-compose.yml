@@ -1,0 +1,22 @@
+.catalog:
+  name: "Rancher Server Nginx SSL"
+  version: "v1.0.0"
+  description: "Rancher Server behind Nginx proxy with Let's Encrypt SSL"
+  uuid: rancher-server-nginx-ssl-0
+  questions: 
+    - variable: "LETS_ENCRYPT_EMAIL"
+      label: "Let's Encrypt admin email"
+      description: "Email for Let's Encrypt (e.g webmaster@domain.com)"
+      required: true
+      type: "string"
+    - variable: "DOMAIN"
+      label: "Domain (e.g www.domain.com)"
+      description: "Domain for Nginx vhost and Let's Encrypt certificate"
+      required: true
+      type: "string"
+    - variable: "HOST_LABEL"
+      label: "Host label"
+      description: "Specify a Rancher host label here that will be used to determine where the stack will be deployed"
+      required: true
+      default: "rancher-server=true"
+      type: "string"

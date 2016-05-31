@@ -1,0 +1,6 @@
+name: OpenVPN Server
+description: |
+  OpenVPN server
+version: v1.0.0
+category: Applications
+maintainer: Nicolas Hug <webmaster@nicolashug.com>

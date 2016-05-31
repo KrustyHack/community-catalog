@@ -1,0 +1,15 @@
+backup:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label_soft: ${HOST_LABEL}
+  image: frekele/helicopterizer
+  volumes:
+    - /home/docker:/data:ro
+  environment:
+    CRON_SCHEDULE: ${CRON_SCHEDULE}
+    STORAGE_PROVIDER: ${STORAGE_PROVIDER}
+    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    AWS_S3_BUCKET_NAME: ${AWS_S3_BUCKET_NAME}
+    AWS_S3_PATH: ${AWS_S3_PATH}
+  command: backup --sync

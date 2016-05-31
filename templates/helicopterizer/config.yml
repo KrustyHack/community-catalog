@@ -1,6 +1,6 @@
 name: Helicopterizer
 description: |
   Helicopterizer Docker Backup to AWS
-version: v1.0.0
+version: v0.2.1
 category: Backup
 maintainer: Nicolas Hug <webmaster@nicolashug.com>

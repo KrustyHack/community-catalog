@@ -1,8 +1,8 @@
 .catalog:
   name: "Helicopterizer"
-  version: "v0.2.1"
+  version: "v0.2.1-0.0.1"
   description: "Helicopterizer Docker Backup to AWS"
-  uuid: helicopterizer-0
+  uuid: helicopterizer-1
   questions: 
     - variable: "CRON_SCHEDULE"
       label: "Cron schedule"

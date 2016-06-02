@@ -31,11 +31,6 @@
       description: "AWS S3 bucket name"
       required: true
       type: "string"
-    - variable: "AWS_S3_PATH"
-      label: "AWS S3 path"
-      description: "AWS S3 path"
-      required: true
-      type: "string"
     - variable: "AWS_DEFAULT_REGION"
       label: "AWS default region"
       description: "AWS default region"
